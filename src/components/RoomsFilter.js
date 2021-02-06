@@ -79,7 +79,7 @@ export default function RoomsFilter({ rooms }) {
                 </div>
                 {/* Capacity Filter */}
                 <div className='form-group'>
-                    <lablel htmlFor='size'>Room Size (Sq. Ft)</lablel>
+                    <label htmlFor='size'>Room Size(Sq.Ft)</label>
                     <div className='size-inputs'>
                         <input id='size'
                             type='number'

@@ -20,15 +20,15 @@ class RoomProvider extends Component {
         pets: false
     }
 
-    componentDidMount(){
+    componentDidMount() {
         let rooms = this.formatData(items)
         let featuredRooms = rooms.filter(room => room.featured === true)
         let maxPrice = Math.max(...rooms.map((item) => item.price))
         let maxSize = Math.max(...rooms.map((item) => item.size))
-        this.setState({ 
+        this.setState({
             rooms,
             featuredRooms,
-            sortedRooms:rooms,
+            sortedRooms: rooms,
             loading: false,
             price: maxPrice,
             maxPrice,
@@ -39,7 +39,7 @@ class RoomProvider extends Component {
     formatData(items) {
         let tempItems = items.map((item) => {
             let id = item.sys.id
-            let images = item.fields.images.map(image =>  image.fields.file.url )
+            let images = item.fields.images.map(image => image.fields.file.url)
             let room = { ...item.fields, images, id }
             return room
         })
@@ -48,7 +48,7 @@ class RoomProvider extends Component {
 
     getRoom = (slug) => {
         let tempRooms = [...this.state.rooms]
-        const room = tempRooms.find((room) => 
+        const room = tempRooms.find((room) =>
             room.slug === slug
         )
         return room
@@ -61,56 +61,56 @@ class RoomProvider extends Component {
         this.setState({
             [name]: value
         },
-        this.filterRooms)
+            this.filterRooms)
     }
 
     filterRooms = () => {
         let { rooms, type, capacity, price, minSize, maxSize, breakfast, pets } = this.state
-            //all the rooms 
-            let tempRooms = [...rooms]
+        //all the rooms 
+        let tempRooms = [...rooms]
 
-            //parse values of capacity as select box returns a string
-            capacity = parseInt(capacity)
+        //parse values of capacity as select box returns a string
+        capacity = parseInt(capacity)
 
-            //filter by type
-                if (type !== 'all'){
-                    tempRooms = tempRooms.filter(room => room.type === type )
-                }
+        //filter by type
+        if (type !== 'all') {
+            tempRooms = tempRooms.filter(room => room.type === type)
+        }
 
-            //filter by capacity
-                if (capacity !== 1){
-                    tempRooms = tempRooms.filter(room => room.capacity >= capacity)
-                }
+        //filter by capacity
+        if (capacity !== 1) {
+            tempRooms = tempRooms.filter(room => room.capacity >= capacity)
+        }
 
-            //filter by price
-                tempRooms = tempRooms.filter(room => room.price <= price)
+        //filter by price
+        tempRooms = tempRooms.filter(room => room.price <= price)
 
-            //filter by size
-                tempRooms = tempRooms.filter(room => room.size >= minSize && room.size <= maxSize)
+        //filter by size
+        tempRooms = tempRooms.filter(room => room.size >= minSize && room.size <= maxSize)
 
-            //breakfast and pets filters
-                if (breakfast) { 
-                    tempRooms = tempRooms.filter(room => room.breakfast === true)
-                }
+        //breakfast and pets filters
+        if (breakfast) {
+            tempRooms = tempRooms.filter(room => room.breakfast === true)
+        }
 
-                if (pets) {
-                    tempRooms = tempRooms.filter(room => room.pets === true)
-                }
+        if (pets) {
+            tempRooms = tempRooms.filter(room => room.pets === true)
+        }
 
-            //set state after the releavant filters applied
-            this.setState({
-                sortedRooms: tempRooms
-            })
+        //set state after the releavant filters applied
+        this.setState({
+            sortedRooms: tempRooms
+        })
     }
 
     render() {
         return (
-            <RoomContext.Provider value = {{
-                 ...this.state,
-                 getRoom: this.getRoom,
-                 handleChange: this.handleChange
-                  }}
-                 >
+            <RoomContext.Provider value={{
+                ...this.state,
+                getRoom: this.getRoom,
+                handleChange: this.handleChange
+            }}
+            >
                 {this.props.children}
             </RoomContext.Provider>
         )
@@ -123,4 +123,4 @@ export function withRoomConsumer(Component) {
 
 }
 
-export{ RoomProvider, RoomConsumer, RoomContext }
+export { RoomProvider, RoomConsumer, RoomContext }

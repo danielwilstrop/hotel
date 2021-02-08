@@ -15,6 +15,11 @@ export default class SingleRoom extends Component {
         }
 
     }
+
+   componentDidMount() {
+       window.scrollTo(0, 0)
+   }
+
     static contextType = RoomContext
 
     render() {

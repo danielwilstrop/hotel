@@ -2,7 +2,9 @@
 
 Great tutorial project learning to use React in a lot more detail.
 
-Using class components, functional components, hooks, state, router, global context
+Using class components, functional components, hooks, state, router, global context, env variables and more.
+
+Filtering done with vanilla JS
 
 Finally used contenful as a hosting provider for the data and deployed the site using Netlify.
 
